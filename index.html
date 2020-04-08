@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Anaglyph 2d depth view</title>
+		
+		<link rel="icon" type="image/svg+xml" href="../logo/favicon.svg" sizes="any">
+		<meta name="application-name" content="Anaglyph 2d depth view">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-title" content="Anaglyph 2d depth view">
+		<meta name="msapplication-TileColor" content="#aaa">
+		<meta name="theme-color" content="#aaa">
+		<meta name="apple-mobile-web-app-status-bar-style" content="#aaa">
+		<meta name="msapplication-config" content="../logo/browserconfig.xml?v=190925022706">
+		<link rel="apple-touch-icon" sizes="57x57" href="../logo/apple-touch-icon-57x57.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="60x60" href="../logo/apple-touch-icon-60x60.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="72x72" href="../logo/apple-touch-icon-72x72.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="76x76" href="../logo/apple-touch-icon-76x76.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="114x114" href="../logo/apple-touch-icon-114x114.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="120x120" href="../logo/apple-touch-icon-120x120.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="144x144" href="../logo/apple-touch-icon-144x144.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="152x152" href="../logo/apple-touch-icon-152x152.png?v=190925022706">
+		<link rel="apple-touch-icon" sizes="180x180" href="../logo/apple-touch-icon-180x180.png?v=190925022706">
+		<link rel="icon" type="image/png" href="../logo/android-chrome-36x36.png?v=190925022706" sizes="36x36">
+		<link rel="icon" type="image/png" href="../logo/android-chrome-48x48.png?v=190925022706" sizes="48x48">
+		<link rel="icon" type="image/png" href="../logo/android-chrome-72x72.png?v=190925022706" sizes="72x72">
+		<link rel="icon" type="image/png" href="../logo/android-chrome-96x96.png?v=190925022706" sizes="96x96">
+		<link rel="icon" type="image/png" href="../logo/android-chrome-144x144.png?v=190925022706" sizes="144x144">
+		<link rel="icon" type="image/png" href="../logo/android-chrome-192x192.png?v=190925022706" sizes="192x192">
+		<link rel="icon" type="image/png" href="../logo/favicon-16x16.png?v=190925022706" sizes="16x16">
+		<link rel="icon" type="image/png" href="../logo/favicon-32x32.png?v=190925022706" sizes="32x32">
+		<link rel="icon" type="image/png" href="../logo/favicon-96x96.png?v=190925022706" sizes="96x96">
+		<link rel="shortcut icon" type="image/x-icon" href="../logo/favicon.ico?v=190925022706">
+		<meta name="msapplication-TileImage" content="../logo/mstile-150x150.png?v=190925022706">
+		<meta name="msapplication-square70x70logo" content="../logo/mstile-70x70.png?v=190925022706">
+		<meta name="msapplication-square150x150logo" content="../logo/mstile-150x150.png?v=190925022706">
+		<meta name="msapplication-wide310x150logo" content="../logo/mstile-310x150.png?v=190925022706">
+		<meta name="msapplication-square310x310logo" content="../logo/mstile-310x310.png?v=190925022706">
+		<link href="../logo/apple-touch-startup-image-320x460.png?v=190925022706" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-640x920.png?v=190925022706" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-640x1096.png?v=190925022706" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-748x1024.png?v=190925022706" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-750x1024.png?v=190925022706" media="" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-750x1294.png?v=190925022706" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-768x1004.png?v=190925022706" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-1182x2208.png?v=190925022706" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-1242x2148.png?v=190925022706" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-1496x2048.png?v=190925022706" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image">
+		<link href="../logo/apple-touch-startup-image-1536x2008.png?v=190925022706" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image">
+		
+		<style>
+			body{
+				font-family: Helvetica;
+				margin: 0;
+			}
+			
+			
+			#settings{
+				display: inline-block;
+				vertical-align: top;
+			}
+			
+			input[type=range]{
+				vertical-align: middle;
+				width: 100%;
+			}
+			
+			#controlsTable{
+				margin-left: 10px;
+			}
+			
+			#controlsTable td{
+				width:20px;
+				height:20px;
+				text-align: center;
+				vertical-align: center;
+			}
+			
+			.controls{
+				cursor: pointer;
+			}
+			
+			#credit_mark{
+				position: absolute;
+				top: 3px;;
+				left: 3px;
+				margin: 0;
+				font-size: 8pt;
+				color: gray;
+			}
+			
+			#credit_mark a{
+				color: gray;
+			}
+		</style>
+		<script src="../js_libraries/jquery-3.3.1.min.js"></script>
+		<script>
+			var egoWidth;
+			var egoCanvasCtx;
+			var egoCanvasImgData;
+			
+			var topDownWidth;
+			var topDownHeight;
+			
+			var firstPoint = false;
+			var lineObjects = [];
+			
+			var egoPosition = {x:100,y:100,rot:0};
+			var move = "none";
+			
+			
+			window.onload = function(){
+				$('#topDownCanvas').mousedown(function(e){
+					if(firstPoint){
+						if(firstPoint.x<Math.floor(e.pageX - $('#topDownCanvas').offset().left)) lineObjects.push({from:{x:firstPoint.x,y:firstPoint.y},to:{x:Math.floor(e.pageX - $('#topDownCanvas').offset().left),y:Math.floor(e.pageY - $('#topDownCanvas').offset().top)}});
+						else lineObjects.push({to:{x:firstPoint.x,y:firstPoint.y},from:{x:Math.floor(e.pageX - $('#topDownCanvas').offset().left),y:Math.floor(e.pageY - $('#topDownCanvas').offset().top)}});
+						firstPoint = false;
+						redrawTopDown();
+					}
+					else{
+						firstPoint = {x:Math.floor(e.pageX - $('#topDownCanvas').offset().left)+0.5,y:Math.floor(e.pageY - $('#topDownCanvas').offset().top)};
+						redrawTopDown();
+					}
+				});
+				updateViewport();
+				run();
+			}
+			window.onresize = updateViewport;
+			window.onkeydown = function(e) {
+				switch(e.keyCode){
+					case 65: //A
+						move = "rotL";
+						break;
+					case 68: //D
+						move = "rotR";
+						break;
+					case 83: //S
+						move = "back";
+						break;
+					case 87: //W
+						move = "for";
+						break;
+					case 81: //Q
+						move = "left";
+						break;
+					case 69: //E
+						move = "right";
+						break;
+					default:
+						move = "none";
+				}
+			}
+			window.onkeyup = function(){move="none";}
+			
+			xor = (x,y)=>(!(!(x&&!(x&&y))&&!(y&&!(x&&y))));
+			
+			function updateViewport(){
+				egoWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+				document.getElementById("egoCanvas").width = egoWidth;
+				document.getElementById("egoCanvas").style.width = egoWidth+"px";
+				document.getElementById("egoCanvas").style.height = Math.floor(Math.max(document.documentElement.clientHeight, window.innerHeight || 0)/2)+"px";
+				
+				egoCanvasCtx = document.getElementById("egoCanvas").getContext("2d");
+				egoCanvasImgData = egoCanvasCtx.createImageData(egoCanvasCtx.canvas.width, egoCanvasCtx.canvas.height);
+				for(var i=0; i<egoCanvasImgData.data.length; i+=4){
+					egoCanvasImgData.data[i+3] = 255; //alpha
+				}
+				
+				topDownWidth = Math.floor(Math.max(document.documentElement.clientWidth, window.innerWidth || 0)/2);
+				topDownHeight = Math.floor(Math.max(document.documentElement.clientHeight, window.innerHeight || 0)/2)-10;
+				document.getElementById("topDownCanvas").width = topDownWidth;
+				document.getElementById("topDownCanvas").height = topDownHeight;
+				
+				redrawTopDown();
+			};
+			
+			function redrawTopDown(){
+				var ctx = $('#topDownCanvas')[0].getContext("2d");
+				ctx.fillStyle = "#000000";
+				ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
+				ctx.strokeStyle = "#FFFFFF";
+				ctx.lineJoin = "round";
+				ctx.lineWidth = 4;
+				
+				for(let line of lineObjects){
+					ctx.beginPath();
+					ctx.moveTo(line.from.x, line.from.y);
+					ctx.lineTo(line.to.x, line.to.y);
+					ctx.closePath();
+					ctx.stroke();
+				}
+				
+				if(firstPoint){
+					ctx.beginPath();
+					ctx.moveTo(firstPoint.x, firstPoint.y);
+					ctx.lineTo(firstPoint.x, firstPoint.y);
+					ctx.closePath();
+					ctx.stroke();
+				}
+				
+				ctx.strokeStyle = "#999999";
+				ctx.lineWidth = 1;
+				ctx.beginPath();
+				ctx.moveTo(egoPosition.x, egoPosition.y);
+				ctx.lineTo(egoPosition.x+(50*Math.cos(((egoPosition.rot-($('#fov')[0].value/720))%1)*2*Math.PI)), egoPosition.y+(50*Math.sin(((egoPosition.rot-($('#fov')[0].value/720))%1)*2*Math.PI)));
+				ctx.closePath();
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.moveTo(egoPosition.x, egoPosition.y);
+				ctx.lineTo(egoPosition.x+(50*Math.cos(((egoPosition.rot+($('#fov')[0].value/720))%1)*2*Math.PI)), egoPosition.y+(50*Math.sin(((egoPosition.rot+($('#fov')[0].value/720))%1)*2*Math.PI)));
+				ctx.closePath();
+				ctx.stroke();
+				
+				ctx.strokeStyle = "#FF0000";
+				ctx.lineWidth = 6;
+				ctx.beginPath();
+				ctx.moveTo(egoPosition.x, egoPosition.y);
+				ctx.lineTo(egoPosition.x, egoPosition.y);
+				ctx.closePath();
+				ctx.stroke();
+				ctx.lineWidth = 2;
+				ctx.beginPath();
+				ctx.moveTo(egoPosition.x, egoPosition.y);
+				ctx.lineTo(egoPosition.x+(10*Math.cos(egoPosition.rot*2*Math.PI)), egoPosition.y+(10*Math.sin(egoPosition.rot*2*Math.PI)));
+				ctx.closePath();
+				ctx.stroke();
+				
+
+				arrayToCanvasAnaglyph(
+					rayTracing(
+						egoPosition.x+($('#eyeDistance')[0].value/100)*Math.cos(((egoPosition.rot+0.25)%1)*2*Math.PI),
+						egoPosition.y+($('#eyeDistance')[0].value/100)*Math.cos(((egoPosition.rot+0.25)%1)*2*Math.PI),
+						egoPosition.rot,
+						$('#fov')[0].value/360,
+						egoCanvasCtx.canvas.width
+					),
+					rayTracing(
+						egoPosition.x-($('#eyeDistance')[0].value/100)*Math.cos(((egoPosition.rot+0.25)%1)*2*Math.PI),
+						egoPosition.y-($('#eyeDistance')[0].value/100)*Math.cos(((egoPosition.rot+0.25)%1)*2*Math.PI),
+						egoPosition.rot,
+						$('#fov')[0].value/360,
+						egoCanvasCtx.canvas.width
+					)
+				);
+			}
+			
+			function clearTopDown(){
+				lineObjects = [];
+				firstPoint=false;
+				redrawTopDown();
+			}
+			
+			
+			//dataL and dataR: values from 0 (black) to 1 (white)
+			function arrayToCanvasAnaglyph(dataL, dataR){
+				for(var i=0; i<egoCanvasImgData.data.length; i+=4){
+					egoCanvasImgData.data[i]   = 255*dataL[Math.floor(i/4)]; //red
+					egoCanvasImgData.data[i+1] = 255*dataR[Math.floor(i/4)]; //green
+					egoCanvasImgData.data[i+2] = 255*dataR[Math.floor(i/4)]; //blue
+				}
+				egoCanvasCtx.putImageData(egoCanvasImgData, 0, 0);
+			}
+			
+			//rot and fov in values from 0 to 1 (counterclockwise)
+			function rayTracing(x,y,rot,fov,steps){
+				var output = [];
+				for(let step=0;step<steps;step++){
+					let rayVector = {x:Math.cos(((rot-fov/2+step*fov/steps)%1)*2*Math.PI),y:Math.sin(((rot-fov/2+step*fov/steps)%1)*2*Math.PI)};
+					let nearestIntersection = {x:Infinity,y:Infinity,distanceFromStart:Infinity,distance:Infinity};
+					for(let line of lineObjects){
+						if( (line.from.y-line.to.y)*rayVector.x+(line.to.x-line.from.x)*rayVector.y<0 && (line.from.y-line.to.y)*x+(line.to.x-line.from.x)*y<(line.from.y-line.to.y)*line.from.x+(line.to.x-line.from.x)*line.from.y ) continue;
+						if( (line.to.y-line.from.y)*rayVector.x+(line.from.x-line.to.x)*rayVector.y<0 && (line.to.y-line.from.y)*x+(line.from.x-line.to.x)*y<(line.to.y-line.from.y)*line.from.x+(line.from.x-line.to.x)*line.from.y ) continue;
+						//if line would only cross the ray on the opposite side of the ray point -> skip
+						if(!xor(y*rayVector.x-x*rayVector.y<line.from.y*rayVector.x-line.from.x*rayVector.y, y*rayVector.x-x*rayVector.y<line.to.y*rayVector.x-line.to.x*rayVector.y)) continue;
+						//if line does not cross the ray -> skip
+						let intersection = {};
+						let k = (rayVector.y/rayVector.x);
+						let l = (line.to.y-line.from.y)/(line.to.x-line.from.x);
+						let d = (line.from.y-y) - l*(line.from.x-x);
+						intersection.x = d/(k-l);
+						intersection.y = intersection.x*k;
+						if(Math.sqrt(Math.pow(intersection.x,2)+Math.pow(intersection.y,2))<nearestIntersection.distance){
+							nearestIntersection.x = x+intersection.x;
+							nearestIntersection.y = y+intersection.y;
+							nearestIntersection.distance = Math.sqrt(Math.pow(intersection.x,2)+Math.pow(intersection.y,2));
+							nearestIntersection.distanceFromStart = Math.sqrt(Math.pow(nearestIntersection.x-line.from.x,2)+Math.pow(nearestIntersection.y-line.from.y,2));
+						}
+					}
+					if(nearestIntersection.x == Infinity) output.push(0);
+					else output.push(Math.sin(nearestIntersection.distanceFromStart/10)/4+0.75);
+				}
+				return output;
+			}
+			
+			
+			
+			function run(){
+				switch(move){
+					case "for":
+						egoPosition.x += 2*Math.cos(egoPosition.rot*2*Math.PI);
+						egoPosition.y += 2*Math.sin(egoPosition.rot*2*Math.PI);
+						redrawTopDown();
+						break;
+					case "back":
+						egoPosition.x -= 2*Math.cos(egoPosition.rot*2*Math.PI);
+						egoPosition.y -= 2*Math.sin(egoPosition.rot*2*Math.PI);
+						redrawTopDown();
+						break;
+					case "right":
+						egoPosition.x += 2*Math.cos(((egoPosition.rot+0.25)%1)*2*Math.PI);
+						egoPosition.y += 2*Math.sin(((egoPosition.rot+0.25)%1)*2*Math.PI);
+						redrawTopDown();
+						break;
+					case "left":
+						egoPosition.x += 2*Math.cos(((egoPosition.rot+0.75)%1)*2*Math.PI);
+						egoPosition.y += 2*Math.sin(((egoPosition.rot+0.75)%1)*2*Math.PI);
+						redrawTopDown();
+						break;
+					case "rotR":
+						egoPosition.rot = (egoPosition.rot+0.01)%1;
+						redrawTopDown();
+						break;
+					case "rotL":
+						egoPosition.rot = (egoPosition.rot+0.99)%1;
+						redrawTopDown();
+						break;
+				}
+				window.setTimeout(run,30);
+			}
+		</script>
+	</head>
+	<body>
+		<canvas id="egoCanvas" height="1"></canvas>
+		<canvas id="topDownCanvas"></canvas>
+		<div id="settings">
+			Controls:
+			<table id="controlsTable">
+				<tr><td></td><td class="controls" onmousedown="move='for';" onmouseup="move='none';" onmouseleave="move='none';">&#x2191;</td><td></td></tr>
+				<tr><td class="controls" onmousedown="move='left';" onmouseup="move='none';" onmouseleave="move='none';">&#x2190;</td><td></td><td class="controls" onmousedown="move='right';" onmouseup="move='none';" onmouseleave="move='none';">&#x2192;</td></tr>
+				<tr><td></td><td class="controls" onmousedown="move='back';" onmouseup="move='none';" onmouseleave="move='none';">&#x2193;</td><td></td></tr>
+				<tr><td class="controls" onmousedown="move='rotL';" onmouseup="move='none';" onmouseleave="move='none';">&#x21B6;</td><td></td><td class="controls" onmousedown="move='rotR';" onmouseup="move='none';" onmouseleave="move='none';">&#x21B7;</td></tr>
+			</table>
+			<button onclick="clearTopDown();">Clear Lines</button><button onclick="alert('You will need anaglyphic 3d glasses (a red-light-filter on the left side, a blue one on the right side) for this demonstration!\n\nThis is a fun mini project. I wondered how a flatlander (an inhabitant of a 2d world) would perceive his surroundings. We 3d creatures essentially see a 2d image of the world and in the same way probably a flatlander would also only see a 1d image of his surroundings. However, by having two optical sensors (aka eyes) one gaines the ability of depth view. You still cannot see the backside of the object you are looking at, but by looking at the small differences in the inputs of the two optical sensors you can at least make out how far something is away from you. This would probably also be possible in 2d for a flatlander and that is exactly what I showed in this demonstration.\n\nThe bottom canvas shows a top-down persepctive, where you can draw lines, and with ASWD (& QE) or the buttons in the right-bottom corner you can move around in this world. In the top canvas you see the 1d-perception band of the flatlander stretched out in the y-axis, so it is not just 1px high and barely visible.');">Explanation</button>
+			<br>
+			Field of View:<br><input type="range" onmousemove="redrawTopDown()" min="1" max="360" value="90" id="fov"><br>
+			Eye distance:<br><input type="range" onmousemove="redrawTopDown()" min="0" max="200" value="23" id="eyeDistance"><br>
+			<button onclick="$('#fov')[0].value=90;$('#eyeDistance')[0].value=23;redrawTopDown();">Reset</button>
+		</div>
+		<p id="credit_mark">by <a href="../">Elias Leon Foramitti</a></p>
+	</body>
+</html>
